@@ -9,7 +9,7 @@
     "color": "#000000"
   },
   "data": {
-    "url": "https://raw.githubusercontent.com/emoeggyolk/w10-homework/refs/heads/main/data/birth_sex_ethnic_state.csv"
+    "url": "https://raw.githubusercontent.com/emoeggyolk/data-visualisation-2/refs/heads/main/data/birth_sex_ethnic_state.csv"
   },
 
   "params": [

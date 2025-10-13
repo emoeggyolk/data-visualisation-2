@@ -32,7 +32,7 @@
         {
           "lookup": "state_norm",
           "from": {
-            "data": { "url": "https://raw.githubusercontent.com/emoeggyolk/w10-homework/refs/heads/main/data/birth_state.csv" },
+            "data": { "url": "https://raw.githubusercontent.com/emoeggyolk/data-visualisation-2/refs/heads/main/data/birth_state.csv" },
             "key": "state",
             "fields": ["abs"]
           }
@@ -41,7 +41,7 @@
         {
           "lookup": "state_norm",
           "from": {
-            "data": { "url": "https://raw.githubusercontent.com/emoeggyolk/w10-homework/refs/heads/main/data/population_state2022.csv" },
+            "data": { "url": "https://raw.githubusercontent.com/emoeggyolk/data-visualisation-2/refs/heads/main/data/population_state2022.csv" },
             "key": "state",
             "fields": ["population"]
           }
