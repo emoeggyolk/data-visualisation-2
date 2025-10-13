@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Vega libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@6.2.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@6.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.25.0"></script>
+
+  <title>FIT3179 Week 10 – Interactive Visualisations</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
+      background-color: #f5f7fa;
+      color: #0f172a;
+      line-height: 1.45;
+    }
+    header {
+      padding: 30px 16px 10px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0 0 6px;
+      font-size: 24px;
+      font-weight: 700;
+    }
+    header p {
+      margin: 0;
+      color: #64748b;
+      font-size: 14px;
+    }
+    main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: #64748b;
+      font-size: 12px;
+    }
+  </style>
+
+  <script defer src="vega_lite_vis.js"></script>
+</head>
+<body>
+  <header>
+    <h1>Malaysia Births — Interactive Vega-Lite Visualisations</h1>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Chart 1 — Births per 1,000 Population by State (2022)</h2>
+    </p>
+      <div id="choropleth_map"></div>
+    </section>
+
+    <section class="card">
+      <h2>Chart 2 — Births by Ethnicity and Sex (Interactive)</h2>
+    </p>
+      <div id="bar_grouped"></div>
+    </section>
+  </main>
+
+
+</body>
+</html>
+
+
+
+

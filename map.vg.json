@@ -1,0 +1,94 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 800,
+  "height": 450,
+  "background": "#f5f7fa",
+  "title": {
+    "text": "Births per 1,000 Population by State, Malaysia (2022)",
+    "fontSize": 20,
+    "color": "#000000"
+  },
+  "projection": { "type": "conicEqualArea",
+  "parallels": [2, 7],
+  "rotate": [-110, 0, 0],
+  "center": [0, 4],
+  "scale": 2100 },
+
+  "layer": [
+    { "data": {"sphere": {}}, "mark": {"type": "geoshape", "fill": "#f5f7fa"} },
+    { "data": { "graticule": {"step":[3,3]} }, "mark": {"type":"geoshape","stroke":"#d0d3d6","strokeWidth":1} },
+
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/emoeggyolk/data-visualisation-2/refs/heads/main/json/mls_map.json",
+        "format": { "type": "topojson", "feature": "my" }
+      },
+      "transform": [
+        {
+          "calculate": "replace(replace(replace(datum.properties.name,'Kuala Lumpur','W.P. Kuala Lumpur'),'Labuan','W.P. Labuan'),'Putrajaya','W.P. Putrajaya')",
+          "as": "state_norm"
+        },
+
+        {
+          "lookup": "state_norm",
+          "from": {
+            "data": { "url": "https://raw.githubusercontent.com/emoeggyolk/w10-homework/refs/heads/main/data/birth_state.csv" },
+            "key": "state",
+            "fields": ["abs"]
+          }
+        },
+
+        {
+          "lookup": "state_norm",
+          "from": {
+            "data": { "url": "https://raw.githubusercontent.com/emoeggyolk/w10-homework/refs/heads/main/data/population_state2022.csv" },
+            "key": "state",
+            "fields": ["population"]
+          }
+        },
+
+        { "calculate": "datum.abs / datum.population * 1000",
+          "as": "births_per_1000" }
+      ],
+
+      "mark": { "type": "geoshape" },
+
+      "encoding": {
+        "color": {
+          "field": "births_per_1000",
+          "type": "quantitative",
+          "scale": {
+            "scheme": "blues"
+          },
+          "legend": {
+            "values": [10000, 15000, 20000]},
+          "title": "Births per 1,000 population"
+        },
+        "stroke": {
+          "condition": { "param": "hover", "value": "#333333" },
+          "value": "#ffffff"
+        },
+        "strokeWidth": {
+          "condition": { "param": "hover", "value": 1.5 },
+          "value": 0.7
+        },
+        "tooltip": [
+          { "field": "state_norm", "title": "State" },
+          { "field": "abs", "title": "Births 2022" },
+          { "field": "population", "title": "Population 2022", "format": ".1f" },
+          { "field": "births_per_1000", "title": "Births per 1,000 population", "format": ".2f" }
+        ]
+      },
+
+      "params": [
+        {
+          "name": "hover",
+          "select": { "type": "point", "on": "mouseover", "clear": "mouseout" }
+        }
+      ]
+    }
+  ],
+
+  "config": { "legend": { "orient": "right" }, "view": { "stroke": null } }
+}
+

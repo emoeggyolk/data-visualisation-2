@@ -1,0 +1,107 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 800,
+  "height": 450,
+  "background": "#f5f7fa",
+  "title": {
+    "text": "Births by Ethnicity and Sex — Malaysia",
+    "fontSize": 20,
+    "color": "#000000"
+  },
+  "data": {
+    "url": "https://raw.githubusercontent.com/emoeggyolk/w10-homework/refs/heads/main/data/birth_sex_ethnic_state.csv"
+  },
+
+  "params": [
+    {
+      "name": "Year_select",
+      "value": 2022,
+      "bind": { "input": "range", "min": 2000, "max": 2022, "step": 1, "name": "Year: " }
+    },
+    {
+      "name": "State_selection",
+      "bind": {
+        "input": "select",
+        "name": "State: ",
+        "options": [null,"Johor","Kedah","Kelantan","Melaka","Negeri Sembilan","Pahang","Perak","Perlis","Pulau Pinang","Sabah","Sarawak","Selangor","Terengganu","W.P. Kuala Lumpur","W.P. Labuan","W.P. Putrajaya"],
+        "labels": ["Show All","Johor","Kedah","Kelantan","Melaka","Negeri Sembilan","Pahang","Perak","Perlis","Pulau Pinang","Sabah","Sarawak","Selangor","Terengganu","W.P. Kuala Lumpur","W.P. Labuan","W.P. Putrajaya"]
+      }
+    }
+  ],
+
+  "transform": [
+    { "calculate": "year(toDate(datum.date))", "as": "year" },
+    { "filter": "datum.year == Year_select" },
+    { "filter": "State_selection == null || datum.state == State_selection" },
+    { "filter": "datum.sex != 'both' && datum.ethnicity != 'overall'" }
+  ],
+
+  "encoding": {
+    "x": {
+      "field": "ethnicity",
+      "type": "nominal",
+      "title": "Ethnicity",
+      "axis": {"labelAngle": 0},
+      "sort": "-y"
+    },
+    "y": {
+      "aggregate": "sum",
+      "field": "abs",
+      "type": "quantitative",
+      "title": "Number of births",
+      "axis": {"format": ","}
+    }
+  },
+
+  "layer": [
+    {
+      "params": [
+        {
+          "name": "sex_highlight",
+          "select": { "type": "point", "fields": ["sex"] },
+          "bind": "legend"
+        }
+      ],
+      "mark": {"type": "bar", "cornerRadiusTopLeft": 3, "cornerRadiusTopRight": 3},
+      "encoding": {
+        "color": {
+          "field": "sex",
+          "type": "nominal",
+          "scale": { "domain": ["male","female"],
+          "range": ["#47A2F5", "#FB54A5"] },
+          "legend": { "title": "Sex" }
+        },
+        "xOffset": { "field": "sex" },
+        "opacity": { "condition": { "param": "sex_highlight", "value": 0.95 }, "value": 0.6 },
+        "tooltip": [
+          {"field": "state", "title": "State"},
+          {"field": "year", "title": "Year"},
+          {"field": "ethnicity", "title": "Ethnicity"},
+          {"field": "sex", "title": "Sex"},
+          {"aggregate": "sum", "field": "abs", "title": "Births", "format": ","}
+        ]
+      }
+    },
+
+    {
+      "mark": {"type": "text", "dy": -4, "fontSize": 11, "fontWeight": "bold"},
+      "encoding": {
+        "color": {
+          "field": "sex",
+          "type": "nominal",
+          "legend": null
+        },
+        "xOffset": {"field": "sex"},
+        "text": {"aggregate": "sum", "field": "abs", "format": ","}
+      }
+    }
+
+    
+  ],
+
+  "config": {
+    "view": {"stroke": null},
+    "axis": {"labelFontSize": 12, "titleFontSize": 12},
+    "legend": {"orient": "right"}
+  }
+}
