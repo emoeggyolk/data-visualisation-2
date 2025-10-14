@@ -1,0 +1,62 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 800,
+  "height": 400,
+  "background": "#f8fafc",
+  "title": {
+    "text": "Total Marriages in Malaysia (2017–2022)",
+    "fontSize": 18,
+    "color": "#000000"
+  },
+
+  "data": {
+    "url": "https://raw.githubusercontent.com/emoeggyolk/data-visualisation-2/refs/heads/main/data/marriages.csv"
+  },
+
+  "transform": [
+    { "calculate": "year(toDate(datum.date))", "as": "year" },
+    { "filter": "datum.year >= 2017 && datum.year <= 2022" },
+    {
+      "aggregate": [
+        { "op": "sum", "field": "abs", "as": "total_marriages" }
+      ],
+      "groupby": ["year"]
+    }
+  ],
+
+  "mark": {
+    "type": "line",
+    "point": { "filled": true, "size": 80, "color": "#FF9320" },
+    "strokeWidth": 3,
+    "color": "#FF9320"
+  },
+
+  "encoding": {
+    "x": {
+      "field": "year",
+      "type": "ordinal",
+      "title": "Year",
+      "axis": { "labelAngle": 0, "tickCount": 6 }
+    },
+    "y": {
+      "field": "total_marriages",
+      "type": "quantitative",
+      "title": "Total Marriages",
+      "axis": { "format": "," },
+      "scale": {
+        "domain": [350000, 450000]
+      }
+    
+    },
+    "tooltip": [
+      { "field": "year", "title": "Year" },
+      { "field": "total_marriages", "title": "Total Marriages", "format": "," }
+    ]
+  },
+
+  "config": {
+    "view": { "stroke": null },
+    "axis": { "labelFontSize": 12, "titleFontSize": 12 },
+    "title": { "font": "Arial", "fontSize": 16 }
+  }
+}
