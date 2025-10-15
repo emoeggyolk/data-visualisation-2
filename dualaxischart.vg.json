@@ -1,0 +1,98 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 720,
+  "height": 420,
+  "background": "#f8fafc",
+  "title": {
+    "text": "Births vs Marriages in Malaysia (2017–2022)",
+    "fontSize": 20,
+    "color": "#333"
+  },
+
+  "layer": [
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/emoeggyolk/data-visualisation-2/refs/heads/main/data/births.csv"
+      },
+      "transform": [
+        { "calculate": "year(toDate(datum.date))", "as": "year" },
+        { "filter": "datum.year >= 2017 && datum.year <= 2022" },
+        {
+          "aggregate": [{ "op": "sum", "field": "births", "as": "total_births" }],
+          "groupby": ["year"]
+        }
+      ],
+      "mark": {
+        "type": "line",
+        "strokeWidth": 3,
+        "color": "#1f78b4",
+        "point": { "filled": true, "size": 70, "color": "#377eb8" }
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "title": "Year",
+          "axis": { "labelAngle": 0, "tickCount": 6 }
+        },
+        "y": {
+          "field": "total_births",
+          "type": "quantitative",
+          "title": "Total Births",
+          "axis": { "format": "," },
+          "scale": {"domain": [300000, 550000]}
+        },
+        "tooltip": [
+          { "field": "year", "title": "Year" },
+          { "field": "total_births", "title": "Total Births", "format": "," }
+        ]
+      }
+    },
+
+    {
+      "data": {
+        "url": "https://raw.githubusercontent.com/emoeggyolk/data-visualisation-2/refs/heads/main/data/marriages.csv"
+      },
+      "transform": [
+        { "calculate": "year(toDate(datum.date))", "as": "year" },
+        { "filter": "datum.year >= 2017 && datum.year <= 2022" },
+        {
+          "aggregate": [{ "op": "sum", "field": "abs", "as": "total_marriages" }],
+          "groupby": ["year"]
+        }
+      ],
+      "mark": {
+        "type": "line",
+        "strokeWidth": 3,
+        "color": "#d62728",
+        "point": { "filled": true, "size": 70, "color": "#e41a1c" }
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "title": "Year",
+          "axis": { "labelAngle": 0, "tickCount": 6 }
+        },
+        "y": {
+          "field": "total_marriages",
+          "type": "quantitative",
+          "title": "Total Marriages",
+          "axis": { "format": ",", "orient": "right" },
+          "scale": {"domain": [300000, 550000]}
+        },
+        "tooltip": [
+          { "field": "year", "title": "Year" },
+          { "field": "total_marriages", "title": "Total Marriages", "format": "," }
+        ]
+      }
+    }
+  ],
+
+  "resolve": { "scale": { "y": "independent" } },
+
+  "config": {
+    "view": { "stroke": null },
+    "axis": { "labelFontSize": 12, "titleFontSize": 12 }
+  }
+}
