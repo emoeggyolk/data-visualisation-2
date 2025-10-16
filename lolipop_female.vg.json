@@ -1,0 +1,131 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Female Marriages (per 1,000) vs Population (per 1,000) by State",
+  "width": 700,
+  "height": 500,
+  "data": {
+    "url": "https://raw.githubusercontent.com/emoeggyolk/data-visualisation-2/refs/heads/main/data/marriages_state_age.csv"
+  },
+
+  "params": [
+    {
+      "name": "year",
+      "value": 2019,
+      "bind": {
+        "input": "select",
+        "options": [2017, 2018, 2019, 2020, 2021, 2022],
+        "labels": ["2017", "2018", "2019", "2020", "2021", "2022"],
+        "name": "Year: "
+      }
+    }
+  ],
+
+  "transform": [
+    { "calculate": "year(toDate(datum.date))", "as": "year_num" },
+    { "filter": "datum.sex == 'female' && datum.age == 'all' && datum.year_num == year" },
+
+    { "calculate": "toNumber(datum.abs)", "as": "marriages" },
+    { "calculate": "toNumber(datum.rate)", "as": "marriage_rate" },
+    { "filter": "isFinite(datum.marriages) && isFinite(datum.marriage_rate) && datum.marriage_rate > 0" },
+
+    { "calculate": "datum.marriage_rate", "as": "marriages_per_1000" },
+    { "calculate": "datum.marriages / datum.marriage_rate", "as": "population_per_1000" },
+
+    {
+      "window": [{ "op": "rank", "as": "marriage_rank" }],
+      "sort": [{ "field": "marriages_per_1000", "order": "descending" }]
+    },
+
+    { "fold": ["marriages_per_1000", "population_per_1000"], "as": ["metric", "value"] },
+
+    {
+      "calculate": "datum.metric == 'marriages_per_1000' ? 'Marriages (per 1,000)' : 'Population (per 1,000)'",
+      "as": "metric_label"
+    },
+
+    {
+      "window": [{ "op": "sum", "field": "value", "as": "sum_for_sort" }],
+      "groupby": ["state"]
+    },
+
+    { "sort": [{ "field": "sum_for_sort", "order": "descending" }] }
+  ],
+
+  "encoding": {
+    "x": {
+      "field": "state",
+      "type": "nominal",
+      "title": "State",
+      "sort": { "op": "sum", "field": "value", "order": "descending" },
+      "axis": {
+            "title": "State",
+            "labelAngle": 270,
+            "labelAlign": "right",
+            "labelBaseline": "middle"
+      }
+    },
+    "y": {
+      "field": "value",
+      "type": "quantitative",
+      "title": "Rate per 1,000 People",
+      "axis": { "format": ".1f" },
+      "scale": {
+        "domain": [0, 1900]
+      }
+    }
+  },
+
+  "layer": [
+    {
+      "mark": { "type": "line", "stroke": "#b0b0b0" },
+      "encoding": {
+        "detail": { "field": "state" },
+        "color": { "value": "#b0b0b0" }
+      }
+    },
+    {
+      "mark": { "type": "point", "filled": true, "size": 100 },
+      "encoding": {
+        "color": {
+          "field": "metric_label",
+          "type": "nominal",
+          "scale": {
+            "domain": ["Marriages (per 1,000)", "Population (per 1,000)"],
+            "range": ["#FF81C1", "#4daf4a"]
+          },
+          "legend": { "title": "Metric" }
+        },
+        "tooltip": [
+          { "field": "state", "title": "State" },
+          { "field": "year_num", "title": "Year" },
+          { "field": "metric_label", "title": "Metric" },
+          { "field": "value", "title": "Rate per 1,000", "format": ".2f" }
+        ]
+      }
+    },
+    {
+      "transform": [{ "filter": "datum.metric == 'marriages_per_1000' && datum.marriage_rank == 1" }],
+      "mark": {
+        "type": "text",
+        "dy": -10,
+        "fontWeight": "bold",
+        "fontSize": 12,
+        "color": "#333"
+      },
+      "encoding": {
+        "tooltip": [
+          { "field": "state", "title": "Top State (Marriages per 1,000)" },
+          { "field": "marriages_per_1000", "title": "Marriages per 1,000", "format": ".2f" },
+          { "field": "population_per_1000", "title": "Population (per 1,000)", "format": ".2f" }
+        ]
+      }
+    }
+  ],
+
+  "config": {
+    "axis": { "labelFontSize": 12, "titleFontSize": 13 },
+    "legend": { "titleFontSize": 13, "labelFontSize": 12 },
+    "view": { "stroke": null },
+    "background": "#f5f7fa"
+  }
+}
