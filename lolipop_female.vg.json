@@ -1,5 +1,5 @@
 {
-  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
   "title": "Female Marriages (per 1,000) vs Population (per 1,000) by State",
   "width": 700,
   "height": 500,
