@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "width": 800,
+  "width": 700,
   "height": 450,
   "background": "#f5f7fa",
   "title": {
@@ -9,10 +9,10 @@
     "color": "#000000"
   },
   "projection": { "type": "conicEqualArea",
-  "parallels": [2, 7],
+  "parallels": [2, 0],
   "rotate": [-110, 0, 0],
   "center": [0, 4],
-  "scale": 2100 },
+  "scale": 2000 },
 
   "layer": [
     { "data": {"sphere": {}}, "mark": {"type": "geoshape", "fill": "#f5f7fa"} },
