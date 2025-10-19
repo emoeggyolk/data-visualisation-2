@@ -8,6 +8,8 @@ const vgLollipopF   = "lolipop_female.vg.json";
 const vgLollipopM   = "lolipop_male.vg.json";
 const vgBirthLine   = "birth_linechart.vg.json";
 const vgMarriageLine= "marriage_line.vg.json";
+const vgScatterM    = "scatter_male.vg.json";
+const vgScatterF    = "scatter_female.vg.json";
 
 // Common embed options
 const opts = { actions: { export: true, source: true, editor: true } };
@@ -28,3 +30,7 @@ vegaEmbed("#lollipop_male",   vgLollipopM, opts).catch(console.error);
 // 5) Line pair (side-by-side)
 vegaEmbed("#birth_line",    vgBirthLine, opts).catch(console.error);
 vegaEmbed("#marriage_line", vgMarriageLine, opts).catch(console.error);
+
+// 6) Scatterplot pair (side-by-side)
+vegaEmbed("#scatter_male",   vgScatterM, opts).catch(console.error);
+vegaEmbed("#scatter_female", vgScatterF, opts).catch(console.error);

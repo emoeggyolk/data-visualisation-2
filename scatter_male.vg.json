@@ -1,0 +1,61 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "title": "Marriage Rate vs Birth Rate ('000) by State (Male, 2022)",
+  "width": 600,
+  "height": 500,
+  "background": "#f8fafc",
+  "data": {
+    "url": "https://raw.githubusercontent.com/emoeggyolk/data-visualisation-2/refs/heads/main/data/marriages_state_age.csv"
+  },
+  "transform": [
+    { "calculate": "year(toDate(datum.date))", "as": "year" },
+    { "filter": "datum.sex == 'male'" },
+    { "filter": "datum.year == 2022" },
+    { "aggregate": [{"op": "mean", "field": "rate", "as": "marriage_rate"}], "groupby": ["state"] },
+    {
+      "lookup": "state",
+      "from": {
+        "data": {
+          "url": "https://raw.githubusercontent.com/emoeggyolk/data-visualisation-2/refs/heads/main/data/birth_state.csv"
+        },
+        "key": "state",
+        "fields": ["abs"]
+      }
+    },
+    { "filter": "datum.abs != null" },
+    { "calculate": "datum.abs / 1000", "as": "birth_rate" }
+  ],
+  "mark": {
+    "type": "circle",
+    "filled": true,
+    "opacity": 0.8,
+    "size": 200
+  },
+  "encoding": {
+    "x": {
+      "field": "birth_rate",
+      "type": "quantitative",
+      "title": "Birth Rate ('000)"
+    },
+    "y": {
+      "field": "marriage_rate",
+      "type": "quantitative",
+      "title": "Marriage Rate ('000)"
+    },
+    "color": {
+      "field": "state",
+      "type": "nominal",
+      "legend": null,
+      "scale": {"scheme": "category10"}
+    },
+    "tooltip": [
+      {"field": "state", "title": "State"},
+      {"field": "marriage_rate", "title": "Marriage Rate ('000)", "format": ".2f"},
+      {"field": "birth_rate", "title": "Birth Rate ('000)", "format": ".2f"}
+    ]
+  },
+  "config": {
+    "axis": {"labelFontSize": 12, "titleFontSize": 14},
+    "view": {"stroke": null}
+  }
+}
