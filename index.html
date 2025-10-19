@@ -5,13 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Demographic Trends in Malaysia</title>
 
-  <!-- Vega libraries (keep v6 to match your specs) -->
   <script src="https://cdn.jsdelivr.net/npm/vega@6.2.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@6.1.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.25.0"></script>
 
   <style>
-    /* ===== Base style aligned to the example ===== */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -62,7 +60,7 @@
       min-height: 300px;
     }
 
-    /* Two-up grid for side-by-side charts (lollipop pair, line pair) */
+    /* Two-up grid for side-by-side charts */
     .two-up {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -80,11 +78,11 @@
       }
       .charts { width: 100%; }
       .chart {
-        width: 90vw;     /* responsive like the example */
+        width: 90vw;    
         max-width: 100%;
       }
       .two-up {
-        grid-template-columns: 1fr; /* stack side-by-side charts on small screens */
+        grid-template-columns: 1fr; 
       }
     }
   </style>
@@ -121,7 +119,7 @@
         <div class="charts">
           <div id="chart_grouped" class="chart"></div>
         </div>
-        <div class="text-right">
+        <div class="text-down">
           <h4>Interpretation</h4>
           <p>Grouped bars let you compare within-ethnicity male/female differences and scan across
              ethnicities. Use the year/state controls to filter.</p>
@@ -132,8 +130,15 @@
     <!-- Dual-axis (full width) -->
     <section class="chart-container">
       <h2>Dual-Axis Comparison</h2>
-      <div class="charts">
-        <div id="chart_dualaxis" class="chart"></div>
+      <div class = "chart-and-text">
+        <div class="charts">
+          <div id="chart_dualaxis" class="chart"></div>
+        </div>
+        <div class="text-down">
+          <h4>Why Dual-Axis?</h4>
+          <p>This dual-axis chart allows comparison of two related metrics with different scales.
+             Use the year/state controls to filter.</p>
+        </div>
       </div>
     </section>
 
