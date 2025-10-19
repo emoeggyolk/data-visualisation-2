@@ -64,7 +64,7 @@
       "mark": {
         "type": "line",
         "strokeWidth": 3,
-        "color": "#d62728",
+        "color": "#FF9320",
         "point": { "filled": true, "size": 70, "color": "#e41a1c" }
       },
       "encoding": {
