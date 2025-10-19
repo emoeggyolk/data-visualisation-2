@@ -171,16 +171,18 @@
 
   </main>
 
-  <!-- Inline embedding (like the example) -->
+  <!-- Inline embedding -->
   <script>
-    // Local spec file paths (ensure filenames match your repo)
-    const MAP_SPEC          = 'birth_map.vg.json';         // your map spec
-    const GROUPED_SPEC      = 'bar_chart.vg.json';         // births by ethnicity & sex
+    // Local spec file paths
+    const MAP_SPEC          = 'birth_map.vg.json';         
+    const GROUPED_SPEC      = 'bar_chart.vg.json';         
     const DUALAXIS_SPEC     = 'dualaxischart.vg.json';
     const LOLLIPOP_F_SPEC   = 'lolipop_female.vg.json';
     const LOLLIPOP_M_SPEC   = 'lolipop_male.vg.json';
     const BIRTH_LINE_SPEC   = 'birth_linechart.vg.json';
     const MARRIAGE_LINE_SPEC= 'marriage_line.vg.json';
+    const SCATTER_F_SPEC    = 'scatter_female.vg.json';
+    const SCATTER_M_SPEC    = 'scatter_male.vg.json';
 
     const opts = { actions: { export: true, source: true, editor: true } };
 
@@ -194,6 +196,9 @@
 
     vegaEmbed('#chart_birth_line',    BIRTH_LINE_SPEC, opts).catch(console.error);
     vegaEmbed('#chart_marriage_line', MARRIAGE_LINE_SPEC, opts).catch(console.error);
+
+    vegaEmbed('#chart_scatter_female', SCATTER_F_SPEC, opts).catch(console.error);
+    vegaEmbed('#chart_scatter_male',   SCATTER_M_SPEC, opts).catch(console.error);
   </script>
 </body>
 </html>
