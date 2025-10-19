@@ -2,109 +2,185 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Demographic Trends in Malaysia</title>
 
-  <!-- Vega libraries -->
+  <!-- Vega libraries (keep v6 to match your specs) -->
   <script src="https://cdn.jsdelivr.net/npm/vega@6.2.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-lite@6.1.0"></script>
   <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.25.0"></script>
 
-  <title>Demographic Trends in Malaysia</title>
-
   <style>
-    :root {
-      --bg: #f5f7fa;
-      --ink: #0f172a;
-      --muted: #64748b;
-      --card: #ffffff;
-      --shadow: 0 2px 10px rgba(2, 6, 23, .06);
-    }
-
-    * { box-sizing: border-box; }
+    /* ===== Base style aligned to the example ===== */
     body {
+      font-family: Arial, sans-serif;
       margin: 0;
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Inter, Helvetica, Arial, sans-serif;
-      background-color: var(--bg);
-      color: var(--ink);
-      line-height: 1.45;
+      padding: 0;
+      background-color: #f4f4f9;
+      color: #333;
     }
-
-    header { padding: 30px 16px 10px; text-align: center; }
-    header h1 { margin: 0 0 6px; font-size: 24px; font-weight: 700; }
-    header p { margin: 0; color: var(--muted); font-size: 14px; }
-
+    header {
+      background: url('https://thesun.my/binrepository/kl11-16092022-keretapi-sarong_4158250_20240514160312.jpg') no-repeat center center;
+      background-size: cover;
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+    }
+    .header-content {
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 20px;
+      border-radius: 8px;
+      display: inline-block;
+      max-width: 1000px;
+    }
+    h1, h2, h3, h4 {
+      font-family: 'Georgia', serif;
+      margin: 0 0 8px;
+    }
     main {
-      max-width: 1100px;
+      padding: 20px;
+      max-width: 1200px;
       margin: 0 auto;
-      padding: 16px;
+    }
+    .chart-container {
+      margin-bottom: 40px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.08);
+    }
+    .chart-and-text {
       display: flex;
-      flex-direction: column;
-      gap: 32px; /* vertical stack */
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .charts, .text-right, .text-left, .text-below {
+      flex: 1;
+      min-width: 280px;
+      padding: 10px;
+    }
+    .chart {
+      width: 100%;
+      min-height: 300px;
     }
 
-    /* two-up rows for the pairs */
-    .row-2 {
+    /* Two-up grid for side-by-side charts (lollipop pair, line pair) */
+    .two-up {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 16px;
     }
+    .two-up .chart { min-width: 0; }      /* allow shrink within grid */
+    .vega-embed, .vega-embed * { max-width: 100%; }
+    .chart { overflow: hidden; }          /* ensure no overflow/bleed */
 
-    /* give each vis a bit of height so the embed has room */
-    .vis { min-height: 420px; }
-
-    footer { text-align: center; padding: 20px; color: var(--muted); font-size: 12px; }
+    @media (max-width: 768px) {
+      .chart-and-text {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+      .charts { width: 100%; }
+      .chart {
+        width: 90vw;     /* responsive like the example */
+        max-width: 100%;
+      }
+      .two-up {
+        grid-template-columns: 1fr; /* stack side-by-side charts on small screens */
+      }
+    }
   </style>
-
-  <script defer src="vega_lite_vis.js"></script>
 </head>
 <body>
   <header>
-    <h1>Demographic Trends in Malaysia</h1>
-    <p> In Malaysia, marriage rates and birth rates are closely linked, 
-      reflecting the country’s social and cultural structure. </p>
+    <div class="header-content">
+      <h1>Mapping Malaysia’s Demographic Story</h1>
+      <h3>Births, Marriages, and Population Patterns across States</h3>
+    </div>
   </header>
 
   <main>
-    <!-- 1) Map (full width, vertical stack item) -->
-    <section class="card">
+    <!-- Map -->
+    <section class="chart-container">
       <h2>Births per 1,000 Population by State (2022)</h2>
-      <div id="choropleth_map" class="vis"></div>
-    </section>
-
-    <!-- 2) Grouped bar (full width, vertical stack item) -->
-    <section class="card">
-      <h2>Births by Ethnicity and Sex</h2>
-      <div id="bar_grouped" class="vis"></div>
-    </section>
-
-    <!-- 3) Dual-axis chart (full width, vertical stack item) -->
-    <section class="card">
-      <h2>Dual-Axis Comparison</h2>
-      <div id="dual_axis" class="vis"></div>
-    </section>
-
-    <!-- 4) Lollipop charts (horizontal pair inside the vertical flow) -->
-    <section class="card">
-      <h2>Lollipop Comparison — Female vs Male</h2>
-      <div class="row-2">
-        <div id="lollipop_female" class="vis"></div>
-        <div id="lollipop_male" class="vis"></div>
+      <div class="chart-and-text">
+        <div class="charts">
+          <div id="chart_map" class="chart"></div>
+        </div>
+        <div class="text-right">
+          <h4>Why a Map?</h4>
+          <p>This choropleth reveals spatial variation in birth intensity across states. Use the tooltip to
+             compare exact rates and identify outliers.</p>
+        </div>
       </div>
     </section>
 
-    <!-- 5) Line charts (horizontal pair inside the vertical flow) -->
-    <section class="card">
+    <!-- Grouped bar -->
+    <section class="chart-container">
+      <h2>Births by Ethnicity and Sex</h2>
+      <div class="chart-and-text">
+        <div class="charts">
+          <div id="chart_grouped" class="chart"></div>
+        </div>
+        <div class="text-right">
+          <h4>Interpretation</h4>
+          <p>Grouped bars let you compare within-ethnicity male/female differences and scan across
+             ethnicities. Use the year/state controls to filter.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dual-axis (full width) -->
+    <section class="chart-container">
+      <h2>Dual-Axis Comparison</h2>
+      <div class="charts">
+        <div id="chart_dualaxis" class="chart"></div>
+      </div>
+    </section>
+
+    <!-- Lollipop pair (side-by-side) -->
+    <section class="chart-container">
+      <h2>Lollipop Comparison — Female vs Male</h2>
+      <div class="two-up">
+        <div id="chart_lollipop_female" class="chart"></div>
+        <div id="chart_lollipop_male" class="chart"></div>
+      </div>
+    </section>
+
+    <!-- Line pair (side-by-side) -->
+    <section class="chart-container">
       <h2>Trends — Births vs Marriages</h2>
-      <div class="row-2">
-        <div id="birth_line" class="vis"></div>
-        <div id="marriage_line" class="vis"></div>
+      <div class="two-up">
+        <div id="chart_birth_line" class="chart"></div>
+        <div id="chart_marriage_line" class="chart"></div>
       </div>
     </section>
   </main>
 
-  <footer>
-    © 2025 • Your Name • Data sources credited in each chart
-  </footer>
+  <!-- Inline embedding (like the example) -->
+  <script>
+    // Local spec file paths (ensure filenames match your repo)
+    const MAP_SPEC          = 'birth_map.vg.json';         // your map spec
+    const GROUPED_SPEC      = 'bar_chart.vg.json';         // births by ethnicity & sex
+    const DUALAXIS_SPEC     = 'dualaxischart.vg.json';
+    const LOLLIPOP_F_SPEC   = 'lolipop_female.vg.json';
+    const LOLLIPOP_M_SPEC   = 'lolipop_male.vg.json';
+    const BIRTH_LINE_SPEC   = 'birth_linechart.vg.json';
+    const MARRIAGE_LINE_SPEC= 'marriage_line.vg.json';
+
+    const opts = { actions: { export: true, source: true, editor: true } };
+
+    vegaEmbed('#chart_map', MAP_SPEC, opts).catch(console.error);
+    vegaEmbed('#chart_grouped', GROUPED_SPEC, opts).catch(console.error);
+    vegaEmbed('#chart_dualaxis', DUALAXIS_SPEC, opts).catch(console.error);
+
+    // Side-by-side pairs
+    vegaEmbed('#chart_lollipop_female', LOLLIPOP_F_SPEC, opts).catch(console.error);
+    vegaEmbed('#chart_lollipop_male',   LOLLIPOP_M_SPEC, opts).catch(console.error);
+
+    vegaEmbed('#chart_birth_line',    BIRTH_LINE_SPEC, opts).catch(console.error);
+    vegaEmbed('#chart_marriage_line', MARRIAGE_LINE_SPEC, opts).catch(console.error);
+  </script>
 </body>
 </html>
