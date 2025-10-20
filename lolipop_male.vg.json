@@ -91,7 +91,7 @@
           "type": "nominal",
           "scale": {
             "domain": ["Marriages (per 1,000)", "Population (per 1,000)"],
-            "range": ["#377eb8", "#4daf4a"]
+            "range": ["#377eb8", "#FF9320"]
           },
           "legend": { "title": "Metric" }
         },

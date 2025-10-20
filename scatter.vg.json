@@ -10,7 +10,7 @@
     {
       "title": "Male",
       "width": 500,
-      "height": 450,
+      "height": 350,
       "data": {
         "url": "https://raw.githubusercontent.com/emoeggyolk/data-visualisation-2/refs/heads/main/data/marriages_state_age.csv"
       },
@@ -177,7 +177,7 @@
     {
       "title": "Female",
       "width": 500,
-      "height": 450,
+      "height": 350,
       "data": {
         "url": "https://raw.githubusercontent.com/emoeggyolk/data-visualisation-2/refs/heads/main/data/marriages_state_age.csv"
       },
