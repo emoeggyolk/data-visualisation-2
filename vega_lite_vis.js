@@ -1,7 +1,7 @@
 // vega_lite_vis.js
 
-// File names (use exactly the names from your repo)
-const vgMap         = "birth_map.vg.json";          // was map.vg.json in your original; using your screenshot name
+// File names 
+const vgMap         = "birth_map.vg.json";         
 const vgBar         = "bar_chart.vg.json";
 const vgDualAxis    = "dualaxischart.vg.json";
 const vgLollipopF   = "lolipop_female.vg.json";
@@ -10,6 +10,8 @@ const vgBirthLine   = "birth_linechart.vg.json";
 const vgMarriageLine= "marriage_line.vg.json";
 const vgScatterM    = "scatter_male.vg.json";
 const vgScatterF    = "scatter_female.vg.json";
+const vgDonutBirth  = "birth_donut.vg.json";     
+const vgDonutMarriage="marriage_donut.vg.json";   
 
 // Common embed options
 const opts = { actions: { export: true, source: true, editor: true } };
@@ -20,17 +22,21 @@ vegaEmbed("#choropleth_map", vgMap, opts).catch(console.error);
 // 2) Grouped bar
 vegaEmbed("#bar_grouped", vgBar, opts).catch(console.error);
 
-// 3) Dual-axis (full width)
-vegaEmbed("#dual_axis", vgDualAxis, opts).catch(console.error);
-
-// 4) Lollipop pair (side-by-side)
-vegaEmbed("#lollipop_female", vgLollipopF, opts).catch(console.error);
-vegaEmbed("#lollipop_male",   vgLollipopM, opts).catch(console.error);
-
-// 5) Line pair (side-by-side)
+// 3) Line charts (side-by-side)
 vegaEmbed("#birth_line",    vgBirthLine, opts).catch(console.error);
 vegaEmbed("#marriage_line", vgMarriageLine, opts).catch(console.error);
+
+// 4) Dual-axis (full width)
+vegaEmbed("#dual_axis", vgDualAxis, opts).catch(console.error);
+
+// 5) Lollipop pair (side-by-side)
+vegaEmbed("#lollipop_female", vgLollipopF, opts).catch(console.error);
+vegaEmbed("#lollipop_male",   vgLollipopM, opts).catch(console.error);
 
 // 6) Scatterplot pair (side-by-side)
 vegaEmbed("#scatter_male",   vgScatterM, opts).catch(console.error);
 vegaEmbed("#scatter_female", vgScatterF, opts).catch(console.error);
+
+// 7) Donut chart pair (side-by-side)
+vegaEmbed("#donut_birth",    vgDonutBirth, opts).catch(console.error);
+vegaEmbed("#donut_marriage", vgDonutMarriage, opts).catch(console.error);

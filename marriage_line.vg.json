@@ -24,35 +24,137 @@
     }
   ],
 
-  "mark": {
-    "type": "line",
-    "point": { "filled": true, "size": 80, "color": "#FF9320" },
-    "strokeWidth": 3,
-    "color": "#FF9320"
-  },
-
-  "encoding": {
-    "x": {
-      "field": "year",
-      "type": "ordinal",
-      "title": "Year",
-      "axis": { "labelAngle": 0, "tickCount": 6 }
-    },
-    "y": {
-      "field": "total_marriages",
-      "type": "quantitative",
-      "title": "Total Marriages",
-      "axis": { "format": "," },
-      "scale": {
-        "domain": [350000, 450000]
+  "layer": [
+    {
+      "mark": {
+        "type": "line",
+        "point": { "filled": true, "size": 80, "color": "#FF9320" },
+        "strokeWidth": 3,
+        "color": "#FF9320"
+      },
+      "encoding": {
+        "x": {
+          "field": "year",
+          "type": "ordinal",
+          "title": "Year",
+          "axis": { "labelAngle": 0, "tickCount": 6 }
+        },
+        "y": {
+          "field": "total_marriages",
+          "type": "quantitative",
+          "title": "Total Marriages",
+          "axis": { "format": "," },
+          "scale": { "domain": [350000, 450000] }
+        },
+        "tooltip": [
+          { "field": "year", "title": "Year" },
+          { "field": "total_marriages", "title": "Total Marriages", "format": "," }
+        ]
       }
-    
     },
-    "tooltip": [
-      { "field": "year", "title": "Year" },
-      { "field": "total_marriages", "title": "Total Marriages", "format": "," }
-    ]
-  },
+
+    {
+      "transform": [
+        {
+          "window": [{ "op": "rank", "as": "r" }],
+          "sort": [{ "field": "total_marriages", "order": "descending" }]
+        },
+        { "filter": "datum.r == 1" }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "bottom",
+        "dy": -12,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#000000"
+      },
+      "encoding": {
+        "x": { "field": "year", "type": "ordinal" },
+        "y": { "field": "total_marriages", "type": "quantitative" },
+        "text": {
+          "field": "total_marriages",
+          "type": "quantitative",
+          "format": ","
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "window": [{ "op": "rank", "as": "r" }],
+          "sort": [{ "field": "total_marriages", "order": "descending" }]
+        },
+        { "filter": "datum.r == 1" }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "bottom",
+        "dy": -28,
+        "fontSize": 11,
+        "fontStyle": "italic",
+        "color": "#000000"
+      },
+      "encoding": {
+        "x": { "field": "year", "type": "ordinal" },
+        "y": { "field": "total_marriages", "type": "quantitative" },
+        "text": { "value": "Highest" }
+      }
+    },
+
+    {
+      "transform": [
+        {
+          "window": [{ "op": "rank", "as": "r" }],
+          "sort": [{ "field": "total_marriages", "order": "ascending" }]
+        },
+        { "filter": "datum.r == 1" }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "top",
+        "dy": 15,
+        "fontSize": 12,
+        "fontWeight": "bold",
+        "color": "#d62728"
+      },
+      "encoding": {
+        "x": { "field": "year", "type": "ordinal" },
+        "y": { "field": "total_marriages", "type": "quantitative" },
+        "text": {
+          "field": "total_marriages",
+          "type": "quantitative",
+          "format": ","
+        }
+      }
+    },
+    {
+      "transform": [
+        {
+          "window": [{ "op": "rank", "as": "r" }],
+          "sort": [{ "field": "total_marriages", "order": "ascending" }]
+        },
+        { "filter": "datum.r == 1" }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "top",
+        "dy": 30,
+        "fontSize": 11,
+        "fontStyle": "italic",
+        "color": "#d62728"
+      },
+      "encoding": {
+        "x": { "field": "year", "type": "ordinal" },
+        "y": { "field": "total_marriages", "type": "quantitative" },
+        "text": { "value": "Lowest" }
+      }
+    }
+  ],
 
   "config": {
     "view": { "stroke": null },

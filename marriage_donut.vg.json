@@ -1,0 +1,114 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "title": "Marriage Composition by Age Group",
+  "width": 520,
+  "height": 420,
+  "background": "#f8fafc",
+
+  "data": {
+    "url": "https://raw.githubusercontent.com/emoeggyolk/data-visualisation-2/refs/heads/main/data/marriages_state_age.csv"
+  },
+
+  "params": [
+    {
+      "name": "Year_select",
+      "value": 2022,
+      "bind": { "input": "range", "min": 2017, "max": 2022, "step": 1, "name": "Year: " }
+    }
+  ],
+
+  "transform": [
+    { "calculate": "year(toDate(datum.date))", "as": "year" },
+    { "filter": "datum.year == Year_select" },
+    { "filter": "datum.age != 'all'" },
+
+    { "aggregate": [{ "op": "sum", "field": "abs", "as": "marriages" }], "groupby": ["age"] },
+
+    { "joinaggregate": [{ "op": "sum", "field": "marriages", "as": "total_marriages" }] },
+    { "calculate": "datum.marriages / datum.total_marriages", "as": "pct" }
+  ],
+
+  "layer": [
+    {
+      "mark": { "type": "arc", "innerRadius": 110, "stroke": "#fff" },
+      "encoding": {
+        "theta": { "field": "marriages", "type": "quantitative", "title": null },
+        "color": {
+          "field": "age",
+          "type": "nominal",
+          "title": "Age Group",
+          "scale": {
+            "range": [
+              "#E69F00", 
+              "#56B4E9",
+              "#009E73",
+              "#F0E442", 
+              "#0072B2", 
+              "#D55E00", 
+              "#CC79A7",
+              "#999999", 
+              "#70AD47", 
+              "#C27BA0",
+              "#C8A74B" 
+            ]
+          },
+          "sort": [
+            "< 20","20-24","25-29","30-34","35-39","40-44","45-49","50-54","55-59","60+"
+          ]
+        },
+        "tooltip": [
+          { "field": "age", "title": "Age Group" },
+          { "field": "marriages", "title": "Marriages", "format": "," },
+          { "field": "pct", "title": "Percentage", "format": ".1%" }
+        ]
+      }
+    },
+
+    {
+      "transform": [
+        { "window": [{ "op": "rank", "as": "r" }], "sort": [{ "field": "pct", "order": "descending" }] },
+        { "filter": "datum.r == 1" },
+        { "calculate": "datum.age + ' (' + format(datum.pct, '.1%') + ')'", "as": "label" }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "color": "#333"
+      },
+      "encoding": {
+        "x": { "value": 260 },
+        "y": { "value": 210 },
+        "text": { "field": "label" }
+      }
+    },
+    {
+      "transform": [
+        { "window": [{ "op": "rank", "as": "r" }], "sort": [{ "field": "pct", "order": "descending" }] },
+        { "filter": "datum.r == 1" }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "bottom",
+        "dy": -18,
+        "fontSize": 11,
+        "fontStyle": "italic",
+        "color": "#666"
+      },
+      "encoding": {
+        "x": { "value": 260 },
+        "y": { "value": 210 },
+        "text": { "value": "Largest percentage" }
+      }
+    }
+  ],
+
+  "config": {
+    "view": { "stroke": null },
+    "legend": { "orient": "right", "titleFontSize": 12, "labelFontSize": 11 },
+    "axis": { "labelFontSize": 12, "titleFontSize": 12 }
+  }
+}

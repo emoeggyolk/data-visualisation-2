@@ -1,0 +1,106 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "title": "Ethnic Composition of Births",
+  "width": 520,
+  "height": 420,
+  "background": "#f8fafc",
+
+  "data": {
+    "url": "https://raw.githubusercontent.com/emoeggyolk/data-visualisation-2/refs/heads/main/data/birth_sex_ethnic_state.csv"
+  },
+
+  "params": [
+    {
+      "name": "Year_select",
+      "value": 2022,
+      "bind": { "input": "range", "min": 2000, "max": 2022, "step": 1, "name": "Year: " }
+    }
+  ],
+
+  "transform": [
+    { "calculate": "year(toDate(datum.date))", "as": "year" },
+    { "filter": "datum.sex == 'both'" },
+    { "filter": "datum.ethnicity != 'overall'" },
+    { "filter": "datum.year == Year_select" },
+
+    { "aggregate": [{ "op": "sum", "field": "abs", "as": "births" }], "groupby": ["ethnicity"] },
+
+    { "joinaggregate": [{ "op": "sum", "field": "births", "as": "total_births" }] },
+    { "calculate": "datum.births / datum.total_births", "as": "pct" }
+  ],
+
+  "layer": [
+    {
+      "mark": { "type": "arc", "innerRadius": 110, "stroke": "#fff" },
+      "encoding": {
+        "theta": { "field": "births", "type": "quantitative" },
+        "color": {
+          "field": "ethnicity",
+          "type": "nominal",
+          "title": "Ethnicity",
+          "scale": { "range":   [
+              "#E69F00", 
+              "#56B4E9",
+              "#009E73",
+              "#F0E442", 
+              "#0072B2", 
+              "#D55E00"
+            ] 
+          }
+        },
+        "tooltip": [
+          { "field": "ethnicity", "title": "Ethnicity" },
+          { "field": "births", "title": "Births", "format": "," },
+          { "field": "pct", "title": "Percentage", "format": ".1%" }
+        ]
+      }
+    },
+
+    {
+      "transform": [
+        { "window": [{ "op": "rank", "as": "r" }], "sort": [{ "field": "pct", "order": "descending" }] },
+        { "filter": "datum.r == 1" },
+        { "calculate": "datum.ethnicity + ' (' + format(datum.pct, '.1%') + ')'", "as": "label" }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "middle",
+        "fontSize": 16,
+        "fontWeight": "bold",
+        "color": "#333"
+      },
+      "encoding": {
+        "x": { "value": 260 }, 
+        "y": { "value": 210 }, 
+        "text": { "field": "label" }
+      }
+    },
+    {
+      "transform": [
+        { "window": [{ "op": "rank", "as": "r" }], "sort": [{ "field": "pct", "order": "descending" }] },
+        { "filter": "datum.r == 1" }
+      ],
+      "mark": {
+        "type": "text",
+        "align": "center",
+        "baseline": "bottom",
+        "dy": -18,
+        "fontSize": 11,
+        "fontStyle": "italic",
+        "color": "#666"
+      },
+      "encoding": {
+        "x": { "value": 260 },
+        "y": { "value": 210 },
+        "text": { "value": "Largest percentage" }
+      }
+    }
+  ],
+
+  "config": {
+    "view": { "stroke": null },
+    "legend": { "orient": "right", "titleFontSize": 12, "labelFontSize": 11 },
+    "axis": { "labelFontSize": 12, "titleFontSize": 12 }
+  }
+}
