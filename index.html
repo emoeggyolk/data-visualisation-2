@@ -151,15 +151,6 @@
       </div>
     </section>
 
-    <!-- Lollipop pair (side-by-side) -->
-    <section class="chart-container">
-      <h2>Lollipop Comparison — Female vs Male</h2>
-      <div class="two-up">
-        <div id="chart_lollipop_female" class="chart"></div>
-        <div id="chart_lollipop_male" class="chart"></div>
-      </div>
-    </section>
-
     <!-- Scatter single -->
     <section class="chart-container">
       <h2>Scatter Plot — Births vs Marriages</h2>
@@ -231,9 +222,6 @@
     vegaEmbed('#chart_donut_marriage', DONUT_M_SPEC, opts).catch(console.error);
 
     // Side-by-side pairs
-    vegaEmbed('#chart_lollipop_female', LOLLIPOP_F_SPEC, opts).catch(console.error);
-    vegaEmbed('#chart_lollipop_male',   LOLLIPOP_M_SPEC, opts).catch(console.error);
-
     vegaEmbed('#chart_birth_line',    BIRTH_LINE_SPEC, opts).catch(console.error);
     vegaEmbed('#chart_marriage_line', MARRIAGE_LINE_SPEC, opts).catch(console.error);
   </script>

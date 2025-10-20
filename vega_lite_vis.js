@@ -4,8 +4,6 @@
 const vgMap         = "birth_map.vg.json";         
 const vgBar         = "bar_chart.vg.json";
 const vgDualAxis    = "dualaxischart.vg.json";
-const vgLollipopF   = "lolipop_female.vg.json";
-const vgLollipopM   = "lolipop_male.vg.json";
 const vgBirthLine   = "birth_linechart.vg.json";
 const vgMarriageLine= "marriage_line.vg.json";
 const vgScatter =    "scatter.vg.json";
@@ -27,10 +25,6 @@ vegaEmbed("#marriage_line", vgMarriageLine, opts).catch(console.error);
 
 // 4) Dual-axis (full width)
 vegaEmbed("#dual_axis", vgDualAxis, opts).catch(console.error);
-
-// 5) Lollipop pair (side-by-side)
-vegaEmbed("#lollipop_female", vgLollipopF, opts).catch(console.error);
-vegaEmbed("#lollipop_male",   vgLollipopM, opts).catch(console.error);
 
 // 6) Scatterplot pair (full width)
 vegaEmbed("#scatter_plot", vgScatter, opts).catch(console.error);
