@@ -65,7 +65,7 @@
         "type": "line",
         "strokeWidth": 3,
         "color": "#FF9320",
-        "point": { "filled": true, "size": 70, "color": "#e41a1c" }
+        "point": { "filled": true, "size": 70, "color": "#FF9320" }
       },
       "encoding": {
         "x": {
