@@ -9,6 +9,8 @@
   "hconcat": [
     {
       "title": "Male",
+      "width": 500,
+      "height": 450,
       "data": {
         "url": "https://raw.githubusercontent.com/emoeggyolk/data-visualisation-2/refs/heads/main/data/marriages_state_age.csv"
       },
@@ -174,6 +176,8 @@
 
     {
       "title": "Female",
+      "width": 500,
+      "height": 450,
       "data": {
         "url": "https://raw.githubusercontent.com/emoeggyolk/data-visualisation-2/refs/heads/main/data/marriages_state_age.csv"
       },
@@ -335,6 +339,6 @@
   "config": {
     "view": {"stroke": null},
     "axis": {"labelFontSize": 11, "titleFontSize": 12},
-    "legend": {"titleFontSize": 12, "labelFontSize": 10}
+    "legend": {"titleFontSize": 12, "labelFontSize": 8}
   }
 }
