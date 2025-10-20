@@ -35,6 +35,6 @@ vegaEmbed("#lollipop_male",   vgLollipopM, opts).catch(console.error);
 // 6) Scatterplot pair (full width)
 vegaEmbed("#scatter_plot", vgScatter, opts).catch(console.error);
 
-// 7) Donut chart pair (side-by-side)
+// 7) Donut chart 
 vegaEmbed("#donut_birth",    vgDonutBirth, opts).catch(console.error);
 vegaEmbed("#donut_marriage", vgDonutMarriage, opts).catch(console.error);

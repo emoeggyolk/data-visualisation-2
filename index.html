@@ -175,12 +175,33 @@
       </div>
     </section>
 
-    <!-- Donut pair (side-by-side) -->
+    <!-- Donut chart (full width) -->
     <section class="chart-container">
-      <h2>Donut Comparison — Births vs Marriages</h2>
-      <div class="two-up">
-        <div id="chart_donut_birth" class="chart"></div>
-        <div id="chart_donut_marriage" class="chart"></div>
+      <h2>Ethic Composition of Births</h2>
+      <div class="chart-and-text">
+        <div class="charts">
+          <div id="chart_donut_birth" class="chart"></div>
+        </div>
+        <div class="text-down">
+          <h4>Insights</h4>
+          <p>This donut chart shows the <br>ethnic composition of births.<br>
+             Use the year/state controls to filter.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Donut chart (full width) -->
+    <section class="chart-container">
+      <h2>Age Group Composition of Marriages</h2>
+      <div class="chart-and-text">
+        <div class="charts">
+          <div id="chart_donut_marriage" class="chart"></div>
+        </div>
+        <div class="text-down">
+          <h4>Insights</h4>
+          <p>This donut chart shows the <br>ethnic composition of marriages.<br>
+             Use the year/state controls to filter.</p>
+        </div>
       </div>
     </section>
 
@@ -206,6 +227,8 @@
     vegaEmbed('#chart_grouped', GROUPED_SPEC, opts).catch(console.error);
     vegaEmbed('#chart_dualaxis', DUALAXIS_SPEC, opts).catch(console.error);
     vegaEmbed('#chart_scatter', SCATTER_F_SPEC, opts).catch(console.error);
+    vegaEmbed('#chart_donut_birth',    DONUT_B_SPEC, opts).catch(console.error);
+    vegaEmbed('#chart_donut_marriage', DONUT_M_SPEC, opts).catch(console.error);
 
     // Side-by-side pairs
     vegaEmbed('#chart_lollipop_female', LOLLIPOP_F_SPEC, opts).catch(console.error);
@@ -213,9 +236,6 @@
 
     vegaEmbed('#chart_birth_line',    BIRTH_LINE_SPEC, opts).catch(console.error);
     vegaEmbed('#chart_marriage_line', MARRIAGE_LINE_SPEC, opts).catch(console.error);
-
-    vegaEmbed('#chart_donut_birth',    DONUT_B_SPEC, opts).catch(console.error);
-    vegaEmbed('#chart_donut_marriage', DONUT_M_SPEC, opts).catch(console.error);
   </script>
 </body>
 </html>
