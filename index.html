@@ -161,13 +161,26 @@
     </section>
 
     <!-- Scatter pair (side-by-side) -->
-    <section class="chart-container">
+    <!-- <section class="chart-container">
       <h2>Scatter Comparison — Male vs Female</h2>
       <div class="two-up">
-        <div id="chart_scatter_female" class="chart"></div>
         <div id="chart_scatter_male" class="chart"></div>
+        <div id="chart_scatter_female" class="chart"></div>
+      </div>
+    </section> -->
+
+    <!-- Scatter single -->
+    <section class="chart-container">
+      <h2>Scatter Plot — Births vs Marriages</h2>
+      <div class="one-up">
+        <div id="chart_scatter" class="chart"></div>
       </div>
     </section>
+
+    <!-- Line pair (side-by-side) -->
+    <section class="chart-container">
+      <h2>Line Comparison — Births vs Marriages</h2>
+      <div class="two-up">
 
     <!-- Donut pair (side-by-side) -->
     <section class="chart-container">
@@ -190,8 +203,9 @@
     const LOLLIPOP_M_SPEC   = 'lolipop_male.vg.json';
     const BIRTH_LINE_SPEC   = 'birth_linechart.vg.json';
     const MARRIAGE_LINE_SPEC= 'marriage_line.vg.json';
-    const SCATTER_F_SPEC    = 'scatter_female.vg.json';
-    const SCATTER_M_SPEC    = 'scatter_male.vg.json';
+    const SCATTER_F_SPEC    = 'scatter.vg.json';
+    // const SCATTER_F_SPEC    = 'scatter_female.vg.json';
+    // const SCATTER_M_SPEC    = 'scatter_male.vg.json';
     const DONUT_B_SPEC      = 'birth_donut.vg.json';
     const DONUT_M_SPEC      = 'marriage_donut.vg.json';
 
@@ -200,6 +214,7 @@
     vegaEmbed('#chart_map', MAP_SPEC, opts).catch(console.error);
     vegaEmbed('#chart_grouped', GROUPED_SPEC, opts).catch(console.error);
     vegaEmbed('#chart_dualaxis', DUALAXIS_SPEC, opts).catch(console.error);
+    vegaEmbed('#chart_scatter', SCATTER_F_SPEC, opts).catch(console.error);
 
     // Side-by-side pairs
     vegaEmbed('#chart_lollipop_female', LOLLIPOP_F_SPEC, opts).catch(console.error);
@@ -208,8 +223,8 @@
     vegaEmbed('#chart_birth_line',    BIRTH_LINE_SPEC, opts).catch(console.error);
     vegaEmbed('#chart_marriage_line', MARRIAGE_LINE_SPEC, opts).catch(console.error);
 
-    vegaEmbed('#chart_scatter_female', SCATTER_F_SPEC, opts).catch(console.error);
-    vegaEmbed('#chart_scatter_male',   SCATTER_M_SPEC, opts).catch(console.error);
+    // vegaEmbed('#chart_scatter_female', SCATTER_F_SPEC, opts).catch(console.error);
+    // vegaEmbed('#chart_scatter_male',   SCATTER_M_SPEC, opts).catch(console.error);
 
     vegaEmbed('#chart_donut_birth',    DONUT_B_SPEC, opts).catch(console.error);
     vegaEmbed('#chart_donut_marriage', DONUT_M_SPEC, opts).catch(console.error);

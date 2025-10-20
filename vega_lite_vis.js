@@ -8,8 +8,9 @@ const vgLollipopF   = "lolipop_female.vg.json";
 const vgLollipopM   = "lolipop_male.vg.json";
 const vgBirthLine   = "birth_linechart.vg.json";
 const vgMarriageLine= "marriage_line.vg.json";
-const vgScatterM    = "scatter_male.vg.json";
-const vgScatterF    = "scatter_female.vg.json";
+const vgScatter =    "scatter.vg.json";
+// const vgScatterM    = "scatter_male.vg.json";
+// const vgScatterF    = "scatter_female.vg.json";
 const vgDonutBirth  = "birth_donut.vg.json";     
 const vgDonutMarriage="marriage_donut.vg.json";   
 
@@ -34,8 +35,11 @@ vegaEmbed("#lollipop_female", vgLollipopF, opts).catch(console.error);
 vegaEmbed("#lollipop_male",   vgLollipopM, opts).catch(console.error);
 
 // 6) Scatterplot pair (side-by-side)
-vegaEmbed("#scatter_male",   vgScatterM, opts).catch(console.error);
-vegaEmbed("#scatter_female", vgScatterF, opts).catch(console.error);
+// vegaEmbed("#scatter_male",   vgScatterM, opts).catch(console.error);
+// vegaEmbed("#scatter_female", vgScatterF, opts).catch(console.error);
+
+// 6) Scatterplot pair (full width)
+vegaEmbed("#scatter_plot", vgScatter, opts).catch(console.error);
 
 // 7) Donut chart pair (side-by-side)
 vegaEmbed("#donut_birth",    vgDonutBirth, opts).catch(console.error);
