@@ -160,15 +160,6 @@
       </div>
     </section>
 
-    <!-- Scatter pair (side-by-side) -->
-    <!-- <section class="chart-container">
-      <h2>Scatter Comparison — Male vs Female</h2>
-      <div class="two-up">
-        <div id="chart_scatter_male" class="chart"></div>
-        <div id="chart_scatter_female" class="chart"></div>
-      </div>
-    </section> -->
-
     <!-- Scatter single -->
     <section class="chart-container">
       <h2>Scatter Plot — Births vs Marriages</h2>
@@ -179,7 +170,7 @@
         <div class="text-down">
           <h4>Insights</h4>
           <p>This scatter plot reveals correlations <br>between births and marriages.<br>
-             Each point represents a state/year combination.</p>
+             Each point represents a state.</p>
         </div>
       </div>
     </section>
@@ -206,8 +197,6 @@
     const BIRTH_LINE_SPEC   = 'birth_linechart.vg.json';
     const MARRIAGE_LINE_SPEC= 'marriage_line.vg.json';
     const SCATTER_F_SPEC    = 'scatter.vg.json';
-    // const SCATTER_F_SPEC    = 'scatter_female.vg.json';
-    // const SCATTER_M_SPEC    = 'scatter_male.vg.json';
     const DONUT_B_SPEC      = 'birth_donut.vg.json';
     const DONUT_M_SPEC      = 'marriage_donut.vg.json';
 
@@ -224,9 +213,6 @@
 
     vegaEmbed('#chart_birth_line',    BIRTH_LINE_SPEC, opts).catch(console.error);
     vegaEmbed('#chart_marriage_line', MARRIAGE_LINE_SPEC, opts).catch(console.error);
-
-    // vegaEmbed('#chart_scatter_female', SCATTER_F_SPEC, opts).catch(console.error);
-    // vegaEmbed('#chart_scatter_male',   SCATTER_M_SPEC, opts).catch(console.error);
 
     vegaEmbed('#chart_donut_birth',    DONUT_B_SPEC, opts).catch(console.error);
     vegaEmbed('#chart_donut_marriage', DONUT_M_SPEC, opts).catch(console.error);
