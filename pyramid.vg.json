@@ -1,6 +1,5 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "title": "Age of Marriage by Sex and State (2022)",
   "width": 800,
   "height": 400,
   "background": "#f8fafc",
