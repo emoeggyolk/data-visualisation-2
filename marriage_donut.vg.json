@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
-  "width": 520,
+  "width": 600,
   "height": 420,
   "background": "#f8fafc",
 
@@ -78,7 +78,7 @@
         "color": "#333"
       },
       "encoding": {
-        "x": { "value": 260 },
+        "x": { "value": 300 },
         "y": { "value": 210 },
         "text": { "field": "label" }
       }
@@ -98,7 +98,7 @@
         "color": "#666"
       },
       "encoding": {
-        "x": { "value": 260 },
+        "x": { "value": 300 },
         "y": { "value": 210 },
         "text": { "value": "Largest percentage" }
       }

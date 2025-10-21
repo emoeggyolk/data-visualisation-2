@@ -46,7 +46,7 @@
     }
     .chart-and-text {
       display: flex;
-      flex-wrap: column;
+      flex-wrap: center;
       align-items: flex-start;
       gap: 16px;
     }
@@ -60,6 +60,20 @@
       min-height: 300px;
     }
 
+    .text-desription {
+    text-align: center; 
+    max-width: 80%; 
+    }
+
+    .chart-and-text--column {
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+    gap: 16px; 
+    }
+
+
+
     /* Two-up grid for side-by-side charts */
     .two-up {
       display: grid;
@@ -68,7 +82,7 @@
     }
     .two-up .chart { min-width: 0; } 
     .vega-embed, .vega-embed * { max-width: 100%; }
-    .chart { overflow: hidden; }          /* ensure no overflow/bleed */
+    .chart { overflow: hidden; }          
 
     @media (max-width: 768px) {
       .chart-and-text {
@@ -225,13 +239,13 @@
     <!-- Scatter single -->
     <section class="chart-container">
       <h2>What is the final proof?</h2>
-      <div class="chart-and-text">
+      <div class="chart-and-text--column">
         <div class="charts">
           <div id="chart_scatter" class="chart"></div>
         </div>
-        <div class="text-down">
+        <div class="text-description">
           <h4>The Proof: <br>States with More Marriages Have More Births</h4>
-          <p>This scatter plot provides the final evidence. 
+          <p>This scatter plot provides the final evidence. <br>
             Each dot represents a Malaysian state. <br>
             The clear upward trend shows a strong positive 
             correlation: <br>
