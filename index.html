@@ -66,7 +66,26 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 16px;
     }
-    .two-up .chart { min-width: 0; }      /* allow shrink within grid */
+    .two-up .chart { min-width: 0; } 
+
+    .two-col-2to1 {
+      display: grid;
+      grid-template-columns: 2fr 1fr; /* left column twice as wide as right */
+      gap: 16px;
+      align-items: start;
+    }
+
+    /* Stacked charts container (left column) */
+    .charts-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .text-side {
+      padding: 10px;
+    }
+    
     .vega-embed, .vega-embed * { max-width: 100%; }
     .chart { overflow: hidden; }          /* ensure no overflow/bleed */
 
@@ -171,7 +190,7 @@
       <div class="chart-and-text">
         <div class="two-up">
           <div id="chart_grouped" class="chart"></div>
-          <div class="text-below" >
+          <div class="text-down" >
             <p>This chart breaks down those totals by <br>
               both ethnicity and sex. We can now <br>
               compare the number of male and female <br>
@@ -179,7 +198,7 @@
             </p>
           </div>
           <div id="chart_donut_birth" class="chart"></div>
-          <div class="text-below">
+          <div class="text-down" >
             <p>This chart shows the overall ethnic composition <br>
               of live births. We can immediately see that <br>
               Bumiputera births make up the largest share, <br>
