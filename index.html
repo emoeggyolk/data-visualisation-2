@@ -127,6 +127,51 @@
       </div>
     </section>
 
+    <!-- Pyramid chart (full width)-->
+    <section class="chart-container">
+      <h2>Age Distribution of Mothers vs Fathers</h2>
+      <div class="chart-and-text">
+        <div class="charts">
+          <div id="chart_pyramid" class="chart"></div>
+        </div>
+        <div class="text-down">
+          <h4>Insights</h4>
+          <p>This pyramid chart shows the age distribution <br>of mothers and fathers.<br>
+             Use the year/state controls to filter.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Donut chart (full width) -->
+    <section class="chart-container">
+      <h2>Ethic Composition of Births</h2>
+      <div class="chart-and-text">
+        <div class="charts">
+          <div id="chart_donut_birth" class="chart"></div>
+        </div>
+        <div class="text-down">
+          <h4>Insights</h4>
+          <p>This donut chart shows the <br>ethnic composition of births.<br>
+             Use the year/state controls to filter.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Donut chart (full width) -->
+    <section class="chart-container">
+      <h2>Age Group Composition of Marriages</h2>
+      <div class="chart-and-text">
+        <div class="charts">
+          <div id="chart_donut_marriage" class="chart"></div>
+        </div>
+        <div class="text-down">
+          <h4>Insights</h4>
+          <p>This donut chart shows the <br>ethnic composition of marriages.<br>
+             Use the year/state controls to filter.</p>
+        </div>
+      </div>
+    </section>
+
     <!-- Line pair (side-by-side) -->
     <section class="chart-container">
       <h2>Trends — Births vs Marriages</h2>
@@ -166,36 +211,6 @@
       </div>
     </section>
 
-    <!-- Donut chart (full width) -->
-    <section class="chart-container">
-      <h2>Ethic Composition of Births</h2>
-      <div class="chart-and-text">
-        <div class="charts">
-          <div id="chart_donut_birth" class="chart"></div>
-        </div>
-        <div class="text-down">
-          <h4>Insights</h4>
-          <p>This donut chart shows the <br>ethnic composition of births.<br>
-             Use the year/state controls to filter.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Donut chart (full width) -->
-    <section class="chart-container">
-      <h2>Age Group Composition of Marriages</h2>
-      <div class="chart-and-text">
-        <div class="charts">
-          <div id="chart_donut_marriage" class="chart"></div>
-        </div>
-        <div class="text-down">
-          <h4>Insights</h4>
-          <p>This donut chart shows the <br>ethnic composition of marriages.<br>
-             Use the year/state controls to filter.</p>
-        </div>
-      </div>
-    </section>
-
   </main>
 
   <!-- Inline embedding -->
@@ -211,6 +226,7 @@
     const SCATTER_F_SPEC    = 'scatter.vg.json';
     const DONUT_B_SPEC      = 'birth_donut.vg.json';
     const DONUT_M_SPEC      = 'marriage_donut.vg.json';
+    const PYRAMID_SPEC      = 'pyramid.vg.json';
 
     const opts = { actions: { export: true, source: true, editor: true } };
 
@@ -220,6 +236,7 @@
     vegaEmbed('#chart_scatter', SCATTER_F_SPEC, opts).catch(console.error);
     vegaEmbed('#chart_donut_birth',    DONUT_B_SPEC, opts).catch(console.error);
     vegaEmbed('#chart_donut_marriage', DONUT_M_SPEC, opts).catch(console.error);
+    vegaEmbed('#chart_pyramid', PYRAMID_SPEC, opts).catch(console.error);
 
     // Side-by-side pairs
     vegaEmbed('#chart_birth_line',    BIRTH_LINE_SPEC, opts).catch(console.error);
