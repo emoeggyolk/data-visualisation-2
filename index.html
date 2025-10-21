@@ -67,25 +67,6 @@
       gap: 16px;
     }
     .two-up .chart { min-width: 0; } 
-
-    .two-col-2to1 {
-      display: grid;
-      grid-template-columns: 2fr 1fr; /* left column twice as wide as right */
-      gap: 16px;
-      align-items: start;
-    }
-
-    /* Stacked charts container (left column) */
-    .charts-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .text-side {
-      padding: 10px;
-    }
-    
     .vega-embed, .vega-embed * { max-width: 100%; }
     .chart { overflow: hidden; }          /* ensure no overflow/bleed */
 
@@ -188,20 +169,17 @@
       <h2>The Demographic Breakdown of Births</h2>
       <p></p>
       <div class="chart-and-text">
-        <div class="two-up">
+        <div class="two-down">
           <div id="chart_grouped" class="chart"></div>
           <div class="text-down" >
-            <p>This chart breaks down those totals by <br>
-              both ethnicity and sex. We can now <br>
-              compare the number of male and female <br>
-              births within each group.
+            <p>This chart breaks down those totals by both ethnicity and sex.<br> 
+              We can now compare the number of male and female births within each group.
             </p>
           </div>
           <div id="chart_donut_birth" class="chart"></div>
           <div class="text-down" >
-            <p>This chart shows the overall ethnic composition <br>
-              of live births. We can immediately see that <br>
-              Bumiputera births make up the largest share, <br>
+            <p>This chart shows the overall ethnic composition of live births. <br>
+              We can immediately see that Bumiputera births make up the largest share, <br>
               followed by Chinese, Indian, and Others.
             </p>
           </div>
