@@ -1,0 +1,89 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "title": "Age of Marriage by Sex and State (2022)",
+  "width": 800,
+  "height": 400,
+  "background": "#f8fafc",
+
+  "data": {
+    "url": "https://raw.githubusercontent.com/emoeggyolk/data-visualisation-2/refs/heads/main/data/marriages_state_age.csv"
+  },
+
+  "params": [
+    {
+      "name": "State_select",
+      "bind": {
+        "input": "select",
+        "name": "Select State: ",
+        "options": [
+          null,
+          "Johor","Kedah","Kelantan","Melaka","Negeri Sembilan",
+          "Pahang","Perak","Perlis","Pulau Pinang","Sabah",
+          "Sarawak","Selangor","Terengganu","W.P. Kuala Lumpur",
+          "W.P. Labuan","W.P. Putrajaya"
+        ],
+        "labels": ["All States", "Johor","Kedah","Kelantan","Melaka","Negeri Sembilan",
+          "Pahang","Perak","Perlis","Pulau Pinang","Sabah",
+          "Sarawak","Selangor","Terengganu","W.P. Kuala Lumpur",
+          "W.P. Labuan","W.P. Putrajaya"]
+      },
+      "value": "Selangor"
+    }
+  ],
+
+  "transform": [
+    { "calculate": "year(toDate(datum.date))", "as": "year" },
+    { "filter": "datum.year == 2022" },
+    { "filter": "datum.age != 'all'" },
+    { "filter": "State_select == null || datum.state == State_select" },
+    {
+      "aggregate": [
+        { "op": "sum", "field": "abs", "as": "marriages" }
+      ],
+      "groupby": ["sex","age"]
+    },
+    { 
+      "calculate": "datum.sex == 'male' ? -datum.marriages : datum.marriages", 
+      "as": "signed_marriages" 
+    }
+  ],
+
+  "mark": "bar",
+
+  "encoding": {
+    "y": {
+      "field": "age",
+      "type": "ordinal",
+      "sort": "descending",
+      "title": "Age Group"
+    },
+    "x": {
+      "field": "signed_marriages",
+      "type": "quantitative",
+      "title": "Number of Marriages",
+      "axis": {
+        "format": ",",
+        "labelExpr": "datum.value < 0 ? format(-datum.value, ',') : format(datum.value, ',')"
+      }
+    },
+    "color": {
+      "field": "sex",
+      "type": "nominal",
+      "title": "Sex",
+      "scale": {
+        "domain": ["female","male"],
+        "range": ["#FB54A5", "#47A2F5"]
+      }
+    },
+    "tooltip": [
+      { "field": "sex", "title": "Sex" },
+      { "field": "age", "title": "Age Group" },
+      { "field": "marriages", "title": "Marriages", "format": "," }
+    ]
+  },
+
+  "config": {
+    "view": { "stroke": null },
+    "axis": { "labelFontSize": 12, "titleFontSize": 14 }
+  }
+}
