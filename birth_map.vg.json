@@ -3,11 +3,6 @@
   "width": 800,
   "height": 450,
   "background": "#f5f7fa",
-  "title": {
-    "text": "Births per 1,000 Population by State, Malaysia (2022)",
-    "fontSize": 20,
-    "color": "#000000"
-  },
   "projection": { "type": "conicEqualArea",
   "parallels": [2, 0],
   "rotate": [-110, 0, 0],
