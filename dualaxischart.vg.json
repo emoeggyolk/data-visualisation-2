@@ -3,11 +3,6 @@
   "width": 700,
   "height": 400,
   "background": "#f8fafc",
-  "title": {
-    "text": "Births vs Marriages in Malaysia (2017–2022)",
-    "fontSize": 18,
-    "color": "#000000"
-  },
 
   "resolve": { "scale": { "y": "independent" } },
 
